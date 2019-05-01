@@ -1,7 +1,7 @@
 
 import HomePage from '../pages/home.vue';
 import AboutPage from '../pages/about.vue';
-import tracklist from '..pages/trackList.vue'
+import tracklist from '../pages/trackList.vue'
 
 
 import DynamicRoutePage from '../pages/dynamic-route.vue';

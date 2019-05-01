@@ -5,7 +5,7 @@
 
     <!-- Left panel with cover effect-->
    <navbar />
-
+     
     <!-- Your main view, should have "view-main" class -->
     <f7-view main class="safe-areas" url="/"></f7-view>
   </f7-app>

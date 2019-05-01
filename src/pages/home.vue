@@ -1,6 +1,6 @@
 <template>
   <f7-page name="home">
-    <background />
+    <background/>
 
     <!-- Top Navbar -->
     <f7-navbar :sliding="false">
@@ -9,17 +9,44 @@
       </f7-nav-left>
       <f7-nav-title sliding>Trials Fusion Ninja</f7-nav-title>
     </f7-navbar>
-  
-   
 
+    <button class="col track-btn button button-fill color-teal"><f7-link href="/trackList/">track list</f7-link></button>
+
+    <div class="block-title">Welcome To Trials The Fusion Ninja App</div>
+    <div class="block">
+      <div class="block-header">About This App</div>
+      <p>This is a fan made app with all the best ninja's of trials fusion. Search tracks/creators or search by ninja level.</p>
+  
+  <button class="col button color-black"><f7-link href="/about/">More info</f7-link></button>
+ 
+     
+    </div>
   </f7-page>
 </template>
 
 <script>
-import background from '../components/Background'
+
+import background from "../components/Background";
+
 export default {
   components: {
     background
-  }
-}
+  },
+  data() {
+    return {};
+  },
+  methods: {}
+};
 </script>
+
+
+<style scoped>
+.block-title {
+  margin-top: 30vh;
+}
+.track-btn {
+  position: absolute;
+  bottom: 0;
+  height: 10vh;
+}
+</style>
