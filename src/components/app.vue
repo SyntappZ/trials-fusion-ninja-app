@@ -3,8 +3,8 @@
     <!-- Status bar overlay for fullscreen mode-->
     <f7-statusbar></f7-statusbar>
 
-    <!-- Left panel with cover effect-->
-   <navbar />
+    
+   
      
     <!-- Your main view, should have "view-main" class -->
     <f7-view main class="safe-areas" url="/"></f7-view>
@@ -14,6 +14,7 @@
 import cordovaApp from "../js/cordova-app.js";
 import routes from "../js/routes.js";
 import navbar from '../components/Navbar'
+
 
 export default {
   components: {

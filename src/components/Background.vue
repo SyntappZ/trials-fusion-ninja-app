@@ -16,8 +16,11 @@ export default {
 
 <style>
   #background {
+    position: fixed;
    background: url('../assets/background.jpg');
    background-position:center;
-   filter:grayscale(60)
+   filter:grayscale(60);
+   
+   
  }
 </style>
