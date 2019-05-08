@@ -3,10 +3,10 @@
     <f7-view>
       <f7-page>
         <f7-navbar title="Menu"></f7-navbar>
-        <div class="list">
+        <!-- <div class="list">
           <ul>
             <li>
-              <div class="item-content">
+              <div class="item-content" link="/">
                 <div class="item-media">
                   <i class="f7-icons size-20">home_fill</i>
                 </div>
@@ -17,7 +17,7 @@
               </div>
             </li>
             <li>
-              <div class="item-content" >
+              <div class="item-content" link="/trackList/">
                 <div class="item-media">
                   <i class="f7-icons size-20">folder_fill</i>
                 </div>
@@ -39,7 +39,23 @@
               </div>
             </li>
           </ul>
-        </div>
+        </div> -->
+          <f7-list>
+        <f7-list-item
+          link="/"
+          title="Home"
+          link-view="#main-view"
+          panel-close
+          reload-all
+        />
+        <f7-list-item
+          link="/trackList/"
+          title="Track List"
+          link-view="#main-view"
+          panel-close
+          reload-all
+        />
+      </f7-list>
         
          <button  class="col button color-black auth">Syntappz</button>
          

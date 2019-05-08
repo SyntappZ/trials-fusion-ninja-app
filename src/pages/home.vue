@@ -10,7 +10,7 @@
       <f7-nav-title sliding>Trials Fusion Ninja</f7-nav-title>
     </f7-navbar>
 
-    <button class="col track-btn button button-fill color-teal"><f7-link href="/trackList/">track list</f7-link></button>
+    <a href="/trackList/"><button class="col track-btn button button-fill color-teal">Track list</button></a>
 
     <div class="block-title">Welcome To Trials The Fusion Ninja App</div>
     <div class="block">
