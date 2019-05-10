@@ -51,31 +51,31 @@
           <f7-block-title>FW/BW</f7-block-title>
           <f7-list no-hairlines-md>
             <f7-list-item
-              :checked="fwbw === 'both'"
-              @change="fwbw = $event.target.value"
+              :checked="fwBw === 'both'"
+              @change="fwBw = $event.target.value"
               radio
               title="BOTH"
               name="fwbw"
                value="both"
             ></f7-list-item>
             <f7-list-item
-              :checked="fwbw === 'fwbw'"
-              @change="fwbw = $event.target.value"
+              :checked="fwBw === 'fwbw'"
+              @change="fwBw = $event.target.value"
               radio
               title="FW/BW ONLY"
               name="fwbw"
-               value="fwbw"
+               value="Yes"
             ></f7-list-item>
             <f7-list-item
-              :checked="fwbw === 'noFwbw'"
-              @change="fwbw = $event.target.value"
+              :checked="fwBw === 'noFwbw'"
+              @change="fwBw = $event.target.value"
               radio
               title="NO FW/BW"
               name="fwbw"
-               value="noFwbw"
+               value="No"
             ></f7-list-item>
           </f7-list>
-          <f7-button @click="GetSearchDetails">Search</f7-button>
+          <f7-button popup-close @click="GetSearchDetails">Search</f7-button>
         </f7-block>
       </f7-page>
     </f7-popup>
@@ -99,21 +99,14 @@ export default {
       trackName: "",
       creator: "",
       ninjaLevel: 'All',
-      fwbw: 'both',
+      fwBw: 'both',
     
     };
   },
   methods: {
     GetSearchDetails() {
-  let info = {
-       trackName: this.trackName,
-       creator: this.creator,
-       ninjaLevel: this.ninjaLevel,
-       fwbw: this.fwbw
-     }
+      this.$refs.search.searchTracks(this.trackName, this.creator, this.ninjaLevel, this.fwBw);
      
-      this.$refs.search.test(info);
-      this. popupOpened = false
     }
     
   }

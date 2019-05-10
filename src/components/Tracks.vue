@@ -1,8 +1,7 @@
 <template>
-  <f7-block id="jeff">
+  <f7-block id="tracks">
     <f7-block-title color="primary" medium>Fusion Ninja Tracks</f7-block-title>
-    <f7-button @click="test">press</f7-button>
-
+   
     <f7-block v-for="track in tracks" :key="track.id">
       <f7-card class="demo-card-header-pic">
         <f7-card-header
@@ -12,7 +11,8 @@
         <f7-card-content>
           <f7-row>
             <p>{{ track.creator }}</p>
-            <f7-icon style="color:#038c73" v7="heart_fill"></f7-icon>
+            <p></p>
+            <!-- <f7-icon style="color:pink" v7="heart"></f7-icon> -->
           </f7-row>
         </f7-card-content>
         <f7-card-footer>
@@ -32,34 +32,55 @@
 import trackList from "../js/trialsTracks.js";
 export default {
 
-  created() {},
+  created() {
+  
+  },
   data() {
     return {
-      tracks: trackList,
-      trackName: "Main Drain",
-      creator: "JamaicanX",
-      ninjaLevel: "N4",
-      fwBw: "yes",
+      tracks: trackList.reverse(),
       color: "pink"
     };
   },
   methods: {
-    test(info) {
-    
-     let ftracks = this.tracks.filter(track => track.level == info.ninjaLevel)
-  this.tracks = ftracks;
+    searchTracks(name, creator, level, fwBw) {
+
+    this.tracks = trackList
+    if(name === '') {
+      this.tracks = this.tracks
+    }else{
+    this.tracks = this.tracks.filter(track => track.trackName.toLowerCase() == name.toLowerCase())
     }
+    if(creator === '') {
+      this.tracks = this.tracks
+    }else{
+    this.tracks = this.tracks.filter(track => track.creator.toLowerCase() == creator.toLowerCase())
+   
+    }
+    if(level === 'All') {
+      this.tracks = this.tracks
+    }else{
+      this.tracks = this.tracks.filter(track => track.level == level)
+    }
+    if(fwBw === 'both') {
+      this.tracks = this.tracks
+    }else{
+      this.tracks = this.tracks.filter(track => track.fwBw == fwBw)
+    
+    }
+    
+    }
+    
 
   },
   computed: {
-  
+    sortTracks() {
+      
+    }
   }
 };
 </script>
 <style scoped>
+
 </style>
 
 
-function newFunction() {
-  return '2';
-}
