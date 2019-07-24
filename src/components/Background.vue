@@ -15,11 +15,15 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: green;
+}
   #background {
    position: fixed;
    background: url('../assets/background.jpg');
    background-position:center;
    filter:grayscale(60);
+   opacity: .6;
    
    
  }

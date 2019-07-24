@@ -20,7 +20,7 @@
       <p>This is a fan made app with all the best ninja's of trials fusion. Search tracks/creators or search by ninja level.</p>
 
       <button class="col button color-black">
-        <f7-link href="/about/">More info</f7-link>
+        <f7-link  href="/about/">More info</f7-link>
       </button>
     </div>
   </f7-page>
