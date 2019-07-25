@@ -15,9 +15,7 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: green;
-}
+
   #background {
    position: fixed;
    background: url('../assets/background.jpg');

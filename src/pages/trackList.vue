@@ -1,6 +1,6 @@
 <template>
   <f7-page id="tracklist">
-    <Background/>
+   
 
     <f7-navbar back-link="Back">
       <f7-nav-title>track list</f7-nav-title>
@@ -84,11 +84,11 @@
 
 <script>
 import tracks from "../components/Tracks";
-import Background from "../components/Background";
+
 import TrackList from "../js/trialsTracks.js";
 export default {
   components: {
-    Background,
+   
     tracks
   },
 
