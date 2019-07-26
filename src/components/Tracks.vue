@@ -5,7 +5,7 @@
       class="searchbar-found"
       media-list
       virtual-list
-      :virtual-list-params="{ items, searchAll, renderExternal, height: $theme.ios ? 63 : ($theme.md ? 73 : 46)}"
+      :virtual-list-params="{ items, renderExternal, height: $theme.ios ? 63 : ($theme.md ? 73 : 46)}"
     >
       <ul>
         <f7-list-item
@@ -84,18 +84,20 @@ export default {
     };
   },
   methods: {
-    searchAll(query, items) {
-      const found = [];
-      for (let i = 0; i < items.length; i += 1) {
-        if (
-          items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
-          query.trim() === ""
-        )
-          found.push(i);
-      }
-      return found; // return array with mathced indexes
-    },
+    // searchAll(query, items) {
+    //   console.log(items)
+    //   const found = [];
+    //   for (let i = 0; i < items.length; i += 1) {
+    //     if (
+    //       items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
+    //       query.trim() === ""
+    //     )
+    //       found.push(i);
+    //   }
+    //   return found; // return array with mathced indexes
+    // },
     renderExternal(vl, vlData) {
+      
       this.vlData = vlData;
     },
     getTrackInfo(track, creator, level, bw) {
@@ -103,6 +105,9 @@ export default {
       this.creator = creator
       this.level = level
       this.bw = bw
+      
+    },
+    search() {
      
     }
   },

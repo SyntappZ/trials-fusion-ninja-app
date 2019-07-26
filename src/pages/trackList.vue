@@ -1,7 +1,5 @@
 <template>
   <f7-page id="tracklist">
-   
-
     <f7-navbar back-link="Back">
       <f7-nav-title>track list</f7-nav-title>
       <f7-nav-right>
@@ -9,7 +7,7 @@
       </f7-nav-right>
     </f7-navbar>
 
-    <tracks ref="search"/>
+    <tracks ref="search" />
     <f7-popup class="popup" :opened="popupOpened" @popup:closed="popupOpened = false">
       <f7-page>
         <f7-navbar title="Search Tracks">
@@ -24,6 +22,7 @@
               @input="trackName = $event.target.value"
               outline
               label="Track Name"
+             
               floating-label
               type="text"
               clear-button
@@ -32,11 +31,17 @@
               @input="creator = $event.target.value"
               outline
               label="Creator"
+             
               floating-label
               type="text"
               clear-button
             ></f7-list-input>
-            <f7-list-input defaultValue="All"  @input="ninjaLevel = $event.target.value" label="Ninja Level" type="select">
+            <f7-list-input
+              defaultValue="All"
+              @input="ninjaLevel = $event.target.value"
+              label="Ninja Level"
+              type="select"
+            >
               <option value="null">All</option>
               <option value="1">ninja Level 1</option>
               <option value="2">Ninja Level 2</option>
@@ -56,7 +61,7 @@
               radio
               title="BOTH"
               name="fwbw"
-               value="both"
+              value="both"
             ></f7-list-item>
             <f7-list-item
               :checked="fwBw === 'fwbw'"
@@ -64,7 +69,7 @@
               radio
               title="FW/BW ONLY"
               name="fwbw"
-               value="Yes"
+              value="Yes"
             ></f7-list-item>
             <f7-list-item
               :checked="fwBw === 'noFwbw'"
@@ -72,7 +77,7 @@
               radio
               title="NO FW/BW"
               name="fwbw"
-               value="No"
+              value="No"
             ></f7-list-item>
           </f7-list>
           <f7-button popup-close @click="GetSearchDetails">Search</f7-button>
@@ -85,30 +90,67 @@
 <script>
 import tracks from "../components/Tracks";
 
-import TrackList from "../js/trialsTracks.js";
+import trackList from "@/js/trialsTracks.js";
 export default {
   components: {
-   
     tracks
+  },
+  mounted() {
+    
+      trackList.forEach(x => {
+      this.tracks.push({
+        creator: x.creator,
+        track: x.trackName,
+        level: x.level,
+        bw: x.fwBw
+      });
+    });
+      
   },
 
   data() {
+    
+  
     return {
-      trackList: TrackList,
+      tracks: [],
       popupOpened: false,
       trackName: "",
       creator: "",
-      ninjaLevel: 'All',
-      fwBw: 'both',
-    
+      ninjaLevel: "All",
+      fwBw: "both",
+      nameSearchArray: [],
+      trackSearchArray: []
     };
   },
   methods: {
     GetSearchDetails() {
-      this.$refs.search.searchTracks(this.trackName, this.creator, this.ninjaLevel, this.fwBw);
-     
+      let result = []
+      let arr = ['jamaicanX', 'tomjam', 'jeffster', 'jamton', 'earljam', 'tomjamton']
+      let jam = 'jama'
+      let reg = new RegExp(/^jam[a-zA-Z0-9]*/);
+      for(let i = 0; i < arr.length; i++) {
+        let test = arr[i].match(reg)
+        if(test) {
+          result.push(test)
+        }
+        
+      }
+      
+
+      console.log(result)
+
+
+
     }
-    
+  },
+  computed: {
+    creatorSearch() {
+     
+    },
+    trackSearch() {
+
+    },
+
   }
 };
 </script>
