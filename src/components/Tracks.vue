@@ -1,6 +1,13 @@
 <template>
   <f7-page>
-    <f7-block-title>{{ tracks }}</f7-block-title>
+    <f7-row>
+      <f7-col>
+        <f7-block-title>{{ tracks }}</f7-block-title>
+      </f7-col>
+      <f7-col>
+        <f7-button @click="allTracks()" outline round>all tracks</f7-button>
+      </f7-col>
+    </f7-row>
     <f7-list
       class="searchbar-found"
       media-list
@@ -9,12 +16,11 @@
     >
       <ul>
         <f7-list-item
-       
           sheet-open=".sheet"
           v-for="(item, index) in vlData.items"
           :key="index"
           media-item
-           @click="getTrackInfo(item.track, item.creator, item.level, item.bw)"
+          @click="getTrackInfo(item.track, item.creator, item.level, item.bw)"
           link="#"
           :title="item.track"
           :text="item.creator"
@@ -22,37 +28,34 @@
           :style="`top: ${vlData.topPosition}px`"
         ></f7-list-item>
       </ul>
-     
     </f7-list>
-     <f7-sheet
-       
-        
-        class="sheet"
-        style="height:auto; --f7-sheet-bg-color: #fff;"
-        swipe-to-close
-        backdrop
-      >
-        <f7-page-content>
-          <f7-block-title class="text-color-primary" large>{{ trackName }}</f7-block-title>
-          <f7-block>
-            <h3>Track Creator: 
-             
-               <span  class="text-color-primary"> {{ creator }}</span>
-              </h3>
-             <h3>Ninja Level: 
-               <span  class="text-color-primary">{{ level }}</span>
+    <f7-sheet class="sheet" style="height:auto; --f7-sheet-bg-color: #fff;" swipe-to-close backdrop>
+      <f7-page-content>
+        <f7-block-title class="text-color-primary" large>{{ trackName }}</f7-block-title>
+        <f7-block>
+          <h3>
+            Track Creator:
+            <span class="text-color-primary">{{ creator }}</span>
+          </h3>
+          <h3>
+            Ninja Level:
+            <span class="text-color-primary">{{ level }}</span>
+          </h3>
 
-             </h3>
-          
-            <h5>BW: 
-              <span :style="{ color: colorChange }">{{ bw }}</span>
-            </h5>
-         
-          </f7-block>
-          
-           
-        </f7-page-content>
-      </f7-sheet>
+          <h5>
+            BW:
+            <span :style="{ color: colorChange }">{{ bw }}</span>
+          </h5>
+          <f7-row class="whiteSpace"></f7-row>
+          <f7-row>
+            <f7-col>
+              <f7-button @click="moreBy(creator)" outline round>more by {{ creator }}</f7-button>
+            </f7-col>
+          </f7-row>
+          <f7-row class="whiteSpace"></f7-row>
+        </f7-block>
+      </f7-page-content>
+    </f7-sheet>
   </f7-page>
 </template>
 
@@ -77,54 +80,57 @@ export default {
         items: []
       },
       tracks: "All Tracks",
-      trackName: '',
-      creator: '',
-      level: '',
-      bw: ''
+      trackName: "",
+      creator: "",
+      level: "",
+      bw: "",
+      searching: false,
+      name: 'Lorcan'
     };
   },
   methods: {
-    // searchAll(query, items) {
-    //   console.log(items)
-    //   const found = [];
-    //   for (let i = 0; i < items.length; i += 1) {
-    //     if (
-    //       items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
-    //       query.trim() === ""
-    //     )
-    //       found.push(i);
-    //   }
-    //   return found; // return array with mathced indexes
-    // },
+  
     renderExternal(vl, vlData) {
-      
-      this.vlData = vlData;
+      if (!this.searching) this.vlData = vlData;
     },
     getTrackInfo(track, creator, level, bw) {
-      this.trackName = track
-      this.creator = creator
-      this.level = level
-      this.bw = bw
-      
+      this.trackName = track;
+      this.creator = creator;
+      this.level = level;
+      this.bw = bw;
     },
-    search() {
+    search() {},
+    moreBy(name) {
+     
+      
+       const found = [];
+        for (let i = 0; i < items.length; i += 1) {
+          if (items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '') found.push(i);
+        }
+        return found; // return array with mathced indexes
+    
+    },
+    allTracks() {
+
+      this.searching = false;
      
     }
   },
   computed: {
     colorChange() {
-      if(this.bw == 'Yes') {
-        return 'green'
-      }else{
-        return 'red'
+      if (this.bw == "Yes") {
+        return "green";
+      } else {
+        return "red";
       }
     }
-  },
-  
+  }
 };
 </script>
 <style scoped>
-
+.whiteSpace {
+  height: 10px;
+}
 </style>
 
 
