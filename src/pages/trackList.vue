@@ -8,7 +8,6 @@
     </f7-navbar>
 
     <f7-searchbar
-   
       no-shadow
       search-container=".virtual-list"
       search-item="li"
@@ -16,7 +15,11 @@
       :disable-button="!$theme.aurora"
     ></f7-searchbar>
 
-    <f7-block-title>{{ tracks }} Tracks</f7-block-title>
+  
+   
+ 
+
+    
 
     <f7-list
       class="searchbar-found"
@@ -62,17 +65,14 @@
             <span :style="{ color: colorChange }">{{ bw }}</span>
           </h5>
           <f7-row class="whiteSpace"></f7-row>
-        
-             <f7-button
-             
-              sheet-close
-                @click="moreBy(selectedCreator)"
-                outline
-                round
-              >more by {{ selectedCreator }}</f7-button>
-        
-            
-           
+
+          <f7-button
+            sheet-close
+            @click="moreBy(selectedCreator)"
+            outline
+            round
+          >more by {{ selectedCreator }}</f7-button>
+
           <f7-row class="whiteSpace"></f7-row>
         </f7-block>
       </f7-page-content>
@@ -90,6 +90,7 @@
 
           <f7-list no-hairlines-md>
             <f7-list-input
+            clear-button
               defaultValue="All"
               @input="ninjaLevel = $event.target.value"
               label="Ninja Level"
@@ -107,7 +108,7 @@
             </f7-list-input>
           </f7-list>
           <f7-block-title>FW/BW</f7-block-title>
-          <f7-list no-hairlines-md>
+          <f7-list no-hairlines-md clear-button>
             <f7-list-item
               :checked="fwBw === 'both'"
               @change="fwBw = $event.target.value"
@@ -134,15 +135,13 @@
             ></f7-list-item>
           </f7-list>
           <f7-row>
-           
             <f7-col>
-               <f7-button popup-close @click="filterTracks" round outline>Filter tracks</f7-button>
+              <f7-button popup-close @click="filterTracks" round outline>Filter tracks</f7-button>
             </f7-col>
-             <f7-col>
+            <f7-col>
               <f7-button popup-close @click="reset" round outline>reset tracks</f7-button>
             </f7-col>
           </f7-row>
-         
         </f7-block>
       </f7-page>
     </f7-popup>
@@ -210,8 +209,8 @@ export default {
     },
     searchAll(query, items) {
       const found = [];
+
       for (let i = 0; i < items.length; i += 1) {
-        console.log(query);
         if (
           items[i].creator.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
           query.trim() === ""
@@ -235,31 +234,26 @@ export default {
       this.bw = bw;
     },
     filterTracks() {
-      this.vlData.items = trackList
-      this.ninjaLevel = 'all'
+      
+      console.log(this.ninjaLevel)
       let theList = this.$f7.virtualList.get();
       let items;
 
-      
-
-
-      if(this.ninjaLevel != 'all') {
-          items = this.vlData.items.filter(x => x.level == this.ninjaLevel)
+      if (this.ninjaLevel != "all") {
+        items = trackList.filter(x => x.level == this.ninjaLevel);
       }
-      if(this.fwBw != 'both') {
-        items =  this.vlData.items.filter(x => x.fwBw == this.fwBw)
+    else if (this.fwBw != "both") {
+    items = trackList.filter(x => x.fwBw == this.fwBw);
       }
+      else if (this.ninjaLevel != "all" && this.fwBw != "both") {
+         items = trackList.filter(x => x.level == this.ninjaLevel);
+         items = items.filter(x => x.fwBw == this.fwBw);
+      }
+
       
-     
-  
-      
- 
-     theList.replaceAllItems(items);
-  
-    
-
-
-
+    this.vlData.items = items
+      theList.replaceAllItems(items);
+      // this.ninjaLevel = 'all'
     },
     reset() {
       let theList = this.$f7.virtualList.get();
@@ -269,8 +263,8 @@ export default {
     moreBy(name) {
       let theList = this.$f7.virtualList.get();
 
-      let items = this.vlData.items.filter(x => x.creator == name);
-
+      let items = trackList.filter(x => x.creator == name);
+     
       theList.replaceAllItems(items);
     }
   },
