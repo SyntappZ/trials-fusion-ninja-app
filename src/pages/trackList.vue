@@ -15,12 +15,6 @@
       :disable-button="!$theme.aurora"
     ></f7-searchbar>
 
-  
-   
- 
-
-    
-
     <f7-list
       class="searchbar-found"
       media-list
@@ -90,13 +84,12 @@
 
           <f7-list no-hairlines-md>
             <f7-list-input
-            clear-button
-              defaultValue="All"
+              defaultValue="all"
               @input="ninjaLevel = $event.target.value"
               label="Ninja Level"
               type="select"
             >
-              <option value="null">All</option>
+              <option value="all">All</option>
               <option value="1">ninja Level 1</option>
               <option value="2">Ninja Level 2</option>
               <option value="3">Ninja Level 3</option>
@@ -108,7 +101,7 @@
             </f7-list-input>
           </f7-list>
           <f7-block-title>FW/BW</f7-block-title>
-          <f7-list no-hairlines-md clear-button>
+          <f7-list defaultValue="both" no-hairlines-md clear-button>
             <f7-list-item
               :checked="fwBw === 'both'"
               @change="fwBw = $event.target.value"
@@ -137,9 +130,6 @@
           <f7-row>
             <f7-col>
               <f7-button popup-close @click="filterTracks" round outline>Filter tracks</f7-button>
-            </f7-col>
-            <f7-col>
-              <f7-button popup-close @click="reset" round outline>reset tracks</f7-button>
             </f7-col>
           </f7-row>
         </f7-block>
@@ -187,26 +177,6 @@ export default {
     };
   },
   methods: {
-    GetSearchDetails() {
-      // let result = [];
-      // let arr = [
-      //   "jamaicanX",
-      //   "tomjam",
-      //   "jeffster",
-      //   "jamton",
-      //   "earljam",
-      //   "tomjamton"
-      // ];
-      // let jam = "jama";
-      // let reg = new RegExp(/^jam[a-zA-Z0-9]*/);
-      // for (let i = 0; i < arr.length; i++) {
-      //   let test = arr[i].match(reg);
-      //   if (test) {
-      //     result.push(test);
-      //   }
-      // }
-      // console.log(result);
-    },
     searchAll(query, items) {
       const found = [];
 
@@ -222,7 +192,7 @@ export default {
         )
           found.push(i);
       }
-      return found; // return array with mathced indexes
+      return found; 
     },
     renderExternal(vl, vlData) {
       this.vlData = vlData;
@@ -234,26 +204,31 @@ export default {
       this.bw = bw;
     },
     filterTracks() {
-      
-      console.log(this.ninjaLevel)
       let theList = this.$f7.virtualList.get();
-      let items;
+      let tracks = [],
+        temp = [];
 
-      if (this.ninjaLevel != "all") {
-        items = trackList.filter(x => x.level == this.ninjaLevel);
-      }
-    else if (this.fwBw != "both") {
-    items = trackList.filter(x => x.fwBw == this.fwBw);
-      }
-      else if (this.ninjaLevel != "all" && this.fwBw != "both") {
-         items = trackList.filter(x => x.level == this.ninjaLevel);
-         items = items.filter(x => x.fwBw == this.fwBw);
+      if (this.ninjaLevel == "all") {
+        trackList.forEach(x => {
+          temp.push(x);
+        });
+      } else {
+        trackList.forEach(x => {
+          if (x.level === this.ninjaLevel) temp.push(x);
+        });
       }
 
-      
-    this.vlData.items = items
-      theList.replaceAllItems(items);
-      // this.ninjaLevel = 'all'
+      if (this.fwBw == "both") {
+        temp.forEach(x => {
+          tracks.push(x);
+        });
+      } else {
+        temp.forEach(x => {
+          if (x.fwBw === this.fwBw) tracks.push(x);
+        });
+      }
+      this.vlData.items = tracks;
+      theList.replaceAllItems(tracks);
     },
     reset() {
       let theList = this.$f7.virtualList.get();
@@ -264,8 +239,9 @@ export default {
       let theList = this.$f7.virtualList.get();
 
       let items = trackList.filter(x => x.creator == name);
-     
+
       theList.replaceAllItems(items);
+      this.vlData.items = items;
     }
   },
   computed: {
