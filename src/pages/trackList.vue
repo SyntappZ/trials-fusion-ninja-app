@@ -209,9 +209,7 @@ export default {
         temp = [];
 
       if (this.ninjaLevel == "all") {
-        trackList.forEach(x => {
-          temp.push(x);
-        });
+        trackList.forEach(x => temp.push(x));
       } else {
         trackList.forEach(x => {
           if (x.level === this.ninjaLevel) temp.push(x);
@@ -219,9 +217,7 @@ export default {
       }
 
       if (this.fwBw == "both") {
-        temp.forEach(x => {
-          tracks.push(x);
-        });
+        temp.forEach(x => tracks.push(x));
       } else {
         temp.forEach(x => {
           if (x.fwBw === this.fwBw) tracks.push(x);
