@@ -17,7 +17,7 @@
        under the License.
  */
 
-package io.syntappz.fusion;
+package npm;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
