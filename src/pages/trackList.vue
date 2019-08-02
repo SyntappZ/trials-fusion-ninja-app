@@ -8,13 +8,13 @@
     </f7-navbar>
 
     <f7-searchbar
-      no-shadow
+      
       search-container=".virtual-list"
       search-item="li"
       search-in=".item-creator"
       :disable-button="!$theme.aurora"
     ></f7-searchbar>
-
+  <f7-block-header>Tracks</f7-block-header>
     <f7-list
       class="searchbar-found"
       media-list
@@ -24,6 +24,7 @@
       <ul>
         <f7-list-item
           sheet-open=".sheet"
+        
           v-for="(item, index) in vlData.items"
           :key="index"
           media-item
@@ -36,7 +37,7 @@
         ></f7-list-item>
       </ul>
     </f7-list>
-    <f7-sheet class="sheet" style="height:auto; --f7-sheet-bg-color: #fff;" swipe-to-close backdrop>
+    <f7-sheet class="sheet" style="height:auto; --f7-sheet-bg-color: #fff;" swipe-to-close  swipeToClose backdrop>
       <f7-page-content>
         <f7-block-title class="text-color-primary" large>{{ selectedTrackName }}</f7-block-title>
         <f7-block>
@@ -142,7 +143,9 @@
 import trackList from "@/js/trialsTracks.js";
 export default {
   components: {},
-  created() {},
+  mounted() {
+   
+  },
 
   data() {
     const items = [];
@@ -165,6 +168,7 @@ export default {
       selectedCreator: "",
       level: "",
       bw: "",
+      amount: '',
 
       nameSearchArray: [],
       trackSearchArray: [],
@@ -173,13 +177,13 @@ export default {
       vlData: {
         items: []
       },
-      tracks: "All"
+      
     };
   },
   methods: {
     searchAll(query, items) {
       const found = [];
-
+      console.log(items.length)
       for (let i = 0; i < items.length; i += 1) {
         if (
           items[i].creator.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
@@ -237,7 +241,7 @@ export default {
       let items = trackList.filter(x => x.creator == name);
 
       theList.replaceAllItems(items);
-      this.vlData.items = items;
+      
     }
   },
   computed: {
@@ -253,7 +257,8 @@ export default {
         .length;
 
       return tracks;
-    }
+    },
+   
   }
 };
 </script>
