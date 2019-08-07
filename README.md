@@ -20,7 +20,7 @@ all information for the app comes from the website i used a web scrapper with no
  - vue
  - framework7
  - cordova
- - node/webscrapper 
+ - node/cheerio 
  
  ## known bugs
  
