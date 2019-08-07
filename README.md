@@ -24,7 +24,7 @@ all information for the app comes from the website i used a web scrapper with no
  
  ## known bugs
  
- - model slide up not working.
+ - model slide down not working.
  
   ## images
   <div class="wrap">
